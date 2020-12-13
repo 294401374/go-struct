@@ -25,7 +25,7 @@ type StaticList struct {
 // cursor 相当于指针
 // 设置第一个元素的游标为下一个可用空余数据（指针）
 // 设置最后一个元素的游标为指向第一个元素的游标（指针）
-func (StList *StaticList) InitList(n int) error {
+func (StList *StaticList) Init(n int) error {
 	if n < 3 {
 		return errors.New("元素不能小于3")
 	}
@@ -41,22 +41,14 @@ func (StList *StaticList) InitList(n int) error {
 	return nil
 }
 
-func (StList *StaticList) CreateNode() int {
-	i := StList.List[0].Cursor
-	if i != 0 {
-		StList.List[0].Cursor = StList.List[i].Cursor
-	}
-	return i
-}
-
 // 添加元素
 // 特点：
 //	1、创建元素，第一个元素的cursor改成新元素的cursor
 // 	2、创建一个元素，获取上个元素的cursor并赋给新增的元素把，把上个元素的cursor改成自己
-func (StList *StaticList) InsertElement(i int, value string) error {
+func (StList *StaticList) Insert(i int, value string) error {
 	var n, p int
 	p = StaticMaxSize - 1
-	if i < 0 || i > StList.ListLength()+1 {
+	if i < 0 || i > StList.Length()+1 {
 		return errors.New("i不符合规范")
 	}
 	n = StList.CreateNode()
@@ -76,7 +68,7 @@ func (StList *StaticList) InsertElement(i int, value string) error {
 }
 
 // 获取链表长度
-func (StList *StaticList) ListLength() int {
+func (StList *StaticList) Length() int {
 	p := StaticMaxSize - 1
 	var i int
 	for {
@@ -89,16 +81,9 @@ func (StList *StaticList) ListLength() int {
 	return i
 }
 
-// 释放链表节点
-func (StList *StaticList) FreeElement(i int) {
-	StList.List[i].Cursor = StList.List[0].Cursor
-	StList.List[0].Cursor = i
-}
-
 // 删除节点
-//
-func (StList *StaticList) DeleteNode(i int) error {
-	if i < 0 || i > StList.ListLength()+1 {
+func (StList *StaticList) Delete(i int) error {
+	if i < 0 || i > StList.Length()+1 {
 		return errors.New("i 不规范")
 	}
 	p := StaticMaxSize - 1
@@ -106,7 +91,21 @@ func (StList *StaticList) DeleteNode(i int) error {
 		p = StList.List[p].Cursor
 	}
 	StList.List[p].Cursor = StList.List[i].Cursor
-	StList.FreeElement(i)
+	StList.FreeNode(i)
 	return nil
 }
 
+// 创建一个节点
+func (StList *StaticList) CreateNode() int {
+	i := StList.List[0].Cursor
+	if i != 0 {
+		StList.List[0].Cursor = StList.List[i].Cursor
+	}
+	return i
+}
+
+// 释放链表节点
+func (StList *StaticList) FreeNode(i int) {
+	StList.List[i].Cursor = StList.List[0].Cursor
+	StList.List[0].Cursor = i
+}

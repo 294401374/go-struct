@@ -13,22 +13,22 @@ func Init()
 func IsEmpty()
 
 3.清除
-func ClearList()
+func Clear()
 
 4.获取元素
-func GetElement()
+func Get()
 
 5.删除元素
-func DeleteElement()
+func Delete()
 
 6. 获取长度
-func ListLength()
+func Len()
 
 7. 判断第i元素是否存在
 func ElementExist()
 
 8. 插入元素
-func InsertElement()
+func Insert()
 
 // 有些还有其他的操作，例如：
 
@@ -45,12 +45,17 @@ const MAXSIZE = 5
 // 线性表顺序存储结构
 type List struct {
 	Element [MAXSIZE]int
-	Length  int
+	Len     int
+}
+
+// 初始化
+func (L *List) Init() {
+
 }
 
 // 获取第i个元素
-func (L *List) GetElement(i, value int) (int, error) {
-	if i >= L.Length {
+func (L *List) Get(i int) (int, error) {
+	if i >= L.Len {
 		return 0, errors.New("i不可以超过List的长度")
 	}
 	return L.Element[i], nil
@@ -63,40 +68,53 @@ func (L *List) GetElement(i, value int) (int, error) {
 // 3、如果插入的位置不合理抛出一场
 // 4、将元素插入到i
 // 5、表长度+1
-func (L *List) InsertElement(i, value int) error {
-	if L.Length >= MAXSIZE {
+func (L *List) Insert(i, value int) error {
+	if L.Len >= MAXSIZE {
 		return errors.New("List长度不能超过MAXSIZE")
 	}
 
-	if i < 0 || i > L.Length {
+	if i < 0 || i > L.Len {
 		return errors.New("i不在正确的范围")
 	}
-	if i <= L.Length-1 {
-		for j := L.Length - 1; j >= i; j-- {
+	if i <= L.Len-1 {
+		for j := L.Len - 1; j >= i; j-- {
 			L.Element[j+1] = L.Element[j]
 		}
 	}
 	L.Element[i] = value
-	L.Length++
+	L.Len++
 	return nil
 }
 
-func (L *List) DelElement(i int) error {
-	if L.Length == 0 {
+// 删除第i个元素
+func (L *List) Delelte(i int) error {
+	if L.Len == 0 {
 		return errors.New("L为空")
 	}
-	if i < 0 || i > L.Length-1 {
+	if i < 0 || i > L.Len-1 {
 		return errors.New("i 超出规定范围")
 	}
 	L.Element[i] = 0
-	if i < L.Length-1 {
-		for j := i + 1; j <= L.Length-1; j++ {
+	if i < L.Len-1 {
+		for j := i + 1; j <= L.Len-1; j++ {
 			L.Element[j-1] = L.Element[j]
 			L.Element[j] = 0
 		}
 	}
-	L.Length--
+	L.Len--
 	return nil
-
 }
 
+// 获取线性表的的长度
+func (L *List) Length() int {
+	return L.Len
+}
+
+// 测试接口
+func (L *List) testThisNode(node NodeContract){
+	node.Insert(1)
+	node.Init()
+	node.Length()
+	node.Get(1)
+	//node.Delete()
+}
