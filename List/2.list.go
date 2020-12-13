@@ -1,8 +1,7 @@
-package main
+package List
 
 import (
 	"errors"
-	"fmt"
 )
 
 /*
@@ -101,20 +100,3 @@ func (L *List) DelElement(i int) error {
 
 }
 
-func main() {
-	list := &List{}
-	fmt.Println(list)
-	list.InsertElement(0, 12)
-	list.InsertElement(1, 1)
-	list.InsertElement(2, 3)
-	list.InsertElement(1, 13)
-	list.InsertElement(4, 14)
-	err := list.InsertElement(4, 14)
-	if err != nil {
-		fmt.Println(err)
-	}
-	fmt.Println(list)
-	// 删除
-	list.DelElement(1)
-	fmt.Println(list)
-}

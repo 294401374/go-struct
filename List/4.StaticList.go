@@ -1,8 +1,7 @@
-package main
+package List
 
 import (
 	"errors"
-	"fmt"
 )
 
 const StaticMaxSize = 10
@@ -111,28 +110,3 @@ func (StList *StaticList) DeleteNode(i int) error {
 	return nil
 }
 
-func main() {
-	SList := &StaticList{}
-	SList.InitList(5)
-	fmt.Println(*SList)
-	SList.InsertElement(1, "A")
-	length := SList.ListLength()
-	fmt.Println(*SList)
-	fmt.Println(length)
-	SList.InsertElement(2, "B")
-	length = SList.ListLength()
-	fmt.Println(*SList)
-	fmt.Println(length)
-	SList.InsertElement(3, "C")
-	SList.InsertElement(4, "D2")
-	SList.InsertElement(4, "D1")
-	SList.InsertElement(6, "D3")
-	fmt.Println(*SList)
-	length = SList.ListLength()
-	fmt.Println("len:",length)
-	SList.DeleteNode(1)
-	length = SList.ListLength()
-	fmt.Println(*SList)
-	fmt.Println("len:", length)
-
-}

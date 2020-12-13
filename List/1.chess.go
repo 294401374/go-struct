@@ -1,4 +1,4 @@
-package main
+package List
 
 import (
 	"errors"
@@ -57,32 +57,3 @@ type chessNode struct {
 	value int
 }
 
-func main() {
-	var chessArray [10][8]int
-	// 1为黑棋，2为白棋
-	chessArray[3][3] = 1
-	chessArray[4][6] = 2
-	chessArray[4][7] = 1
-	chessArray[5][2] = 1
-	chessArray[5][3] = 2
-
-	// 定一个数组来存储一个几盘的存盘
-	array := make([]chessNode, 0)
-	for i, r:= range chessArray {
-		for j, col:= range r{
-			//fmt.Printf("%d\t", col)
-			if col!= 0{
-				tempNode := &chessNode{
-					row : i,
-					column : j,
-					value: col,
-				}
-				array = append(array, *tempNode)
-			}
-		}
-		//fmt.Println()
-	}
-	fmt.Println(array)
-
-
-}

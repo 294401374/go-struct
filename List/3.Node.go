@@ -1,4 +1,4 @@
-package main
+package List
 
 import (
 	"errors"
@@ -111,33 +111,3 @@ func (node *Node) ClearList() {
 	}
 }
 
-func main() {
-	Nodes := new(Node)
-	Nodes.createListHead(3)
-	Nodes.List()
-
-	val, err := Nodes.GetElement(3)
-	if err != nil {
-		fmt.Println(err)
-	}
-	fmt.Println("第n个元素",val)
-	//
-	Nodes.InsertElement(4, 5)
-	Nodes.List()
-	fmt.Println("----------------")
-	fmt.Println(Nodes.delElement(3))
-	Nodes.List()
-	fmt.Println("--------尾部创建链表-------")
-	list := new(Node)
-	list.createListTail(3)
-	list.List()
-	fmt.Println("--------删除整个链表-------")
-	list.ClearList()
-	list.List()
-
-	shu := 3
-	p := &shu
-	if p != nil {
-		fmt.Println(p, *p)
-	}
-}
