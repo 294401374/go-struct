@@ -7,13 +7,16 @@ import (
 
 func main() {
 	node := new(l.Node)
-	node.Init(5)
+	node.Init(4)
 	node.List()
 	fmt.Println("--------------------------")
 	head := node
 	//newHead := node.ReverseNode(head)
-	head.List()
+	// head.List()
 	fmt.Println("---------最后一个的指针和data都是nil----------")
 	newHead := node.ReverseNode(head)
+	newHead.List()
+	fmt.Println("--------------------------")
+	newHead.Reverse()
 	newHead.List()
 }

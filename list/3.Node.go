@@ -127,14 +127,22 @@ func ReverseWithRecurse(head *Node) *Node {
 	}
 }
 
+// 没懂！！！！！！！！！！！
 // 翻转链表--循环
 func (node *Node) Reverse() {
+	//  判断是是否是头结点
+	headNode := new(Node)
+	if node.Data == nil {
+		// nodeNode = node
+		node = node.Next
+	}
 	//  先声明两个变量
 	//  前一个节点
-	preNode := new(Node)
+	var preNode *Node
 	//  后一个节点
 	nextNode := new(Node)
-	for node.Next != nil {
+	// nextNode = nil
+	for node != nil {
 		//  保存头节点的下一个节点，
 		nextNode = node.Next
 		//  将头节点指向前一个节点
@@ -144,18 +152,28 @@ func (node *Node) Reverse() {
 		//  更新头节点
 		node = nextNode
 	}
+	headNode.Next = preNode
+	node = headNode
+	fmt.Println("----------21---------")
+	headNode.List()
+	fmt.Println("----------22---------")
 }
 
-// 没懂！！！！！！！！！！！
+
 // 最后一个的指针和data都是nil,所以错误
 func (node *Node)ReverseNode(head *Node) *Node {
+	//  判断是是否是头结点
+	headNode := new(Node)
+	if head.Data == nil {
+		// headNode = head
+		head = head.Next
+	}
 	//  先声明两个变量
 	//  前一个节点
 	var preNode *Node
-	preNode = nil
 	//  后一个节点
 	nextNode := new(Node)
-	nextNode = nil
+	// nextNode = nil
 	for head != nil {
 		//  保存头节点的下一个节点，
 		nextNode = head.Next
@@ -166,7 +184,6 @@ func (node *Node)ReverseNode(head *Node) *Node {
 		//  更新头节点
 		head = nextNode
 	}
-	headNode := new(Node)
 	headNode.Next = preNode
 	return headNode
 }
