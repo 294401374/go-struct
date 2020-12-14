@@ -1,4 +1,4 @@
-package List
+package list
 
 import (
 	"errors"
@@ -10,6 +10,14 @@ import (
 type Node struct {
 	Next *Node
 	Data interface{}
+}
+
+// 创建一个链表
+func (node *Node) Init(i int) {
+	rand.Seed(time.Now().Unix())
+	for j := 0; j < i; j++ {
+		node.Insert(j, rand.Intn(100))
+	}
 }
 
 // 获取第i个元素

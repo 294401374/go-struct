@@ -1,4 +1,4 @@
-package List
+package list
 
 type NodeContract interface {
 	// 初始化
