@@ -64,10 +64,10 @@ func (node *Node) Delete(i int) error {
 }
 
 // 创建链表，从头部插入
-func (node *Node) InsertWithHead(n int){
+func (node *Node) InsertWithHead(n int) {
 	node.Next = nil
 	rand.Seed(time.Now().Unix())
-	for i := 0; i < n; i++  {
+	for i := 0; i < n; i++ {
 		p := new(Node)
 		//p.Data = rand.Int()
 		p.Data = i
@@ -77,12 +77,12 @@ func (node *Node) InsertWithHead(n int){
 }
 
 // 创建链表，从尾部插入
-func (node *Node) InsertWithTail(n int){
+func (node *Node) InsertWithTail(n int) {
 	node.Next = nil
 	p := node
 	//rand.Seed(time.Now().Unix())
 	rand.Seed(100)
-	for i:=0; i< n ; i++  {
+	for i := 0; i < n; i++ {
 		q := new(Node)
 		q.Data = i
 		p.Next = q
@@ -91,7 +91,7 @@ func (node *Node) InsertWithTail(n int){
 }
 
 // 获取全值
-func (node *Node) List()  {
+func (node *Node) List() {
 	p := node
 	for {
 		if p == nil {
@@ -116,12 +116,66 @@ func (node *Node) Clear() {
 	}
 }
 
+// 翻转链表--递归(未完成)
+func ReverseWithRecurse(head *Node) *Node {
+	if head.Next == nil || head == nil {
+		return head
+	} else {
+		newNode := new(Node)
+		newNode.Next = ReverseWithRecurse(head)
+		return newNode
+	}
+}
+
+// 翻转链表--循环
+func (node *Node) Reverse() {
+	//  先声明两个变量
+	//  前一个节点
+	preNode := new(Node)
+	//  后一个节点
+	nextNode := new(Node)
+	for node.Next != nil {
+		//  保存头节点的下一个节点，
+		nextNode = node.Next
+		//  将头节点指向前一个节点
+		node.Next = preNode
+		//  更新前一个节点
+		preNode = node
+		//  更新头节点
+		node = nextNode
+	}
+}
+
+// 没懂！！！！！！！！！！！
+// 最后一个的指针和data都是nil,所以错误
+func (node *Node)ReverseNode(head *Node) *Node {
+	//  先声明两个变量
+	//  前一个节点
+	var preNode *Node
+	preNode = nil
+	//  后一个节点
+	nextNode := new(Node)
+	nextNode = nil
+	for head != nil {
+		//  保存头节点的下一个节点，
+		nextNode = head.Next
+		//  将头节点指向前一个节点
+		head.Next = preNode
+		//  更新前一个节点
+		preNode = head
+		//  更新头节点
+		head = nextNode
+	}
+	headNode := new(Node)
+	headNode.Next = preNode
+	return headNode
+}
+
 // 测试接口
-func (node *Node) testThisNode(contract NodeContract){
+func (node *Node) testThisNode(contract NodeContract) {
 	contract.Insert(1)
 	contract.Init()
 	contract.Length()
 	contract.Get(1)
 	//node.Delete()
 }
-
